@@ -1,0 +1,71 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test / coverage / type / lint caches
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Project data and artifacts
+data/
+artifacts/
+reports/interim/
+
+# Audio, transcripts, model and container payloads
+*.wav
+*.flac
+*.mp3
+*.rttm
+*.parquet
+tests/fixtures/*.wav
+tests/fixtures/*.flac
+*.zip
+*.tar.gz
+
+# Model and framework caches
+.cache/
+huggingface/
+.huggingface/
+transformers_cache/
+torch/
+.torch/
+
+# Environment and secrets
+.env
+.env.*
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Agent and assistant tooling
+CLAUDE.md
+AGENTS.md
+.claude/
+.cursor/
+
+# Project specification source
+Speech_to_Insight_Agent_Spec.pdf
