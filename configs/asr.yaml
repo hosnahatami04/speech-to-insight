@@ -1,0 +1,8 @@
+# Speech recognition (faster-whisper, CTranslate2 int8 on CPU).
+default_model: asr_base
+accurate_model: asr_small
+beam_size: 5
+temperature: 0.0
+compute_type: int8
+word_timestamps: true
+cpu_threads: 4

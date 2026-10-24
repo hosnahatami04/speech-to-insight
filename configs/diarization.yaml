@@ -1,0 +1,13 @@
+# Diarization: VAD, windowed embeddings, agglomerative clustering.
+vad:
+  threshold: 0.5
+  min_speech_s: 0.25
+  min_silence_s: 0.1
+window_s: 1.5
+hop_s: 0.75
+clustering:
+  metric: cosine
+  linkage: average
+  threshold: 0.7
+alignment:
+  max_gap_s: 1.0

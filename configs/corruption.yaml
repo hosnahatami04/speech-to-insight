@@ -1,0 +1,8 @@
+# Controlled corruption for the error-propagation study.
+noise:
+  types: [white, pink, babble]
+  snr_db: [20, 10, 5, 0]
+transcript:
+  wer_targets: [0.0, 0.05, 0.10, 0.20, 0.30]
+  speaker_swap_rates: [0.0, 0.10, 0.20]
+  seeds: [0, 1, 2]

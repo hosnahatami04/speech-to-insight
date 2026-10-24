@@ -1,0 +1,107 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "speechinsight"
+version = "0.1.0"
+description = "From meeting audio to grounded decisions and action items"
+requires-python = ">=3.11,<3.12"
+license = { text = "MIT" }
+readme = "README.md"
+authors = [{ name = "Hosna Hatami" }]
+
+dependencies = [
+    "numpy>=1.26,<3",
+    "soundfile>=0.12",
+    "scipy>=1.11",
+    "pydantic>=2.6,<3",
+    "pydantic-settings>=2.2",
+    "typer>=0.12",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+asr = [
+    "faster-whisper>=1.0",
+]
+diar = [
+    "torch>=2.2",
+    "speechbrain>=1.0",
+    "silero-vad>=5.1",
+    "scikit-learn>=1.4",
+]
+nlp = [
+    "transformers>=4.40",
+    "sentence-transformers>=3.0",
+    "ollama>=0.3",
+]
+service = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "streamlit>=1.33",
+]
+report = [
+    "matplotlib>=3.8",
+]
+dev = [
+    "ruff>=0.5",
+    "mypy>=1.10",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "hypothesis>=6.100",
+    "pre-commit>=3.7",
+    "pip-audit>=2.7",
+    "jiwer>=3.0",
+    "pyannote.metrics>=3.2",
+    "types-PyYAML>=6.0",
+]
+
+[project.scripts]
+speechinsight = "speechinsight.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/speechinsight"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = [
+    "faster_whisper.*",
+    "speechbrain.*",
+    "silero_vad.*",
+    "sklearn.*",
+    "soundfile.*",
+    "scipy.*",
+    "transformers.*",
+    "sentence_transformers.*",
+    "ollama.*",
+    "jiwer.*",
+    "pyannote.*",
+    "matplotlib.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "ml: tests that load real speech or language models (deselected by default in CI)",
+]
+
+[tool.coverage.run]
+source = ["src/speechinsight"]
+omit = ["src/speechinsight/ui/*"]
+
+[tool.coverage.report]
+show_missing = true
