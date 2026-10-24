@@ -1,0 +1,14 @@
+# Decision and action extraction via a local language model (Ollama, HTTP).
+model_tag: qwen2.5:3b-instruct
+model_digest: sha256:161ddde4c9cd07c9f1ccb4e0167c434bce72caeb3fc1844262fa66bc877b0426
+alt_model_tag: qwen2.5:7b-instruct
+alt_model_digest: sha256:2f15b3218f0552c60647ce60ada83632d2c09755b16259b13e3e4458e9ae419d
+temperature: 0.0
+seed: 0
+prompt_version: v1
+chunk_tokens: 1500
+chunk_overlap_utterances: 2
+merge_similarity_threshold: 0.85
+host: http://localhost:11434
+timeout_s: 120
+retries: 1

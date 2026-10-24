@@ -1,0 +1,48 @@
+seed: 0
+
+paths:
+  data: data
+  artifacts: artifacts
+  reports: reports
+  cache: artifacts/cache
+
+# Each model is pinned to an exact repository revision so resolved weights are
+# reproducible. These revisions were verified reachable and non-gated.
+models:
+  asr_tiny:
+    repo: Systran/faster-whisper-tiny.en
+    revision: 0d3d19a32d3338f10357c0889762bd8d64bbdeba
+  asr_base:
+    repo: Systran/faster-whisper-base.en
+    revision: 3d3d5dee26484f91867d81cb899cfcf72b96be6c
+  asr_small:
+    repo: Systran/faster-whisper-small.en
+    revision: d1d751a5f8271d482d14ca55d9e2deeebbae577f
+  speaker_embedding:
+    repo: speechbrain/spkrec-ecapa-voxceleb
+    revision: 0f99f2d0ebe89ac095bcc5903c4dd8f72b367286
+  nli:
+    repo: cross-encoder/nli-deberta-v3-small
+    revision: fa2804872c3b4bd748f38c0185cc85775361e735
+  matcher_embedding:
+    repo: sentence-transformers/all-MiniLM-L6-v2
+    revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+
+# Corpus identity is recorded here and expanded with manifests in the data phase.
+corpora:
+  librispeech_dev_clean:
+    name: LibriSpeech dev-clean
+    url: https://www.openslr.org/12
+    license: CC BY 4.0
+  librispeech_test_clean:
+    name: LibriSpeech test-clean
+    url: https://www.openslr.org/12
+    license: CC BY 4.0
+  accents:
+    name: Common Voice (accented English subset)
+    url: https://commonvoice.mozilla.org/en/datasets
+    license: CC0 1.0
+  ami:
+    name: AMI Meeting Corpus
+    url: https://groups.inf.ed.ac.uk/ami/corpus/
+    license: CC BY 4.0
