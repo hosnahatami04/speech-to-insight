@@ -1,0 +1,35 @@
+{
+  "git_commit": "smoke-fixture",
+  "model_pins": {
+    "asr_tiny": {"repo": "Systran/faster-whisper-tiny.en", "revision": "0d3d19a32d33"},
+    "asr_base": {"repo": "Systran/faster-whisper-base.en", "revision": "3d3d5dee2648"},
+    "asr_small": {"repo": "Systran/faster-whisper-small.en", "revision": "d1d751a5f827"},
+    "speaker_embedding": {"repo": "speechbrain/spkrec-ecapa-voxceleb", "revision": "0f99f2d0ebe8"},
+    "nli": {"repo": "cross-encoder/nli-deberta-v3-small", "revision": "fa2804872c3b"},
+    "matcher_embedding": {"repo": "sentence-transformers/all-MiniLM-L6-v2", "revision": "1110a243fdf4"},
+    "extractor_model_tag": "qwen2.5:3b-instruct",
+    "extractor_model_digest": "sha256:161ddde4c9cd",
+    "prompt_version": "v1"
+  },
+  "wer": {
+    "points": [
+      {"split": "test-clean", "model": "small.en", "wer": 0.045, "ci_low": 0.040, "ci_high": 0.050, "normalizer": "speechinsight-v1"},
+      {"split": "test-clean", "model": "base.en", "wer": 0.065, "ci_low": 0.060, "ci_high": 0.070, "normalizer": "speechinsight-v1"}
+    ]
+  },
+  "der": {
+    "collar_s": 0.25,
+    "skip_overlap": false,
+    "der": 0.32,
+    "miss": 0.10,
+    "false_alarm": 0.08,
+    "confusion": 0.14
+  },
+  "extraction": {
+    "schema_validity": 0.99,
+    "evidence_valid_share": 1.0,
+    "dropped_share": 0.12,
+    "unsupported_entities_share": 0.015,
+    "nli_supported_share": 0.92
+  }
+}
