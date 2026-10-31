@@ -84,6 +84,7 @@ module = [
     "sklearn.*",
     "soundfile.*",
     "scipy.*",
+    "torch.*",
     "transformers.*",
     "sentence_transformers.*",
     "ollama.*",
