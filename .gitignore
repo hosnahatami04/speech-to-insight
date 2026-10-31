@@ -65,7 +65,7 @@ Thumbs.db
 CL*.md
 AGENTS.md
 .cl*/
-.cursor/
+.cur*/
 
 # Local-only reference documents
 *_Spec.pdf
