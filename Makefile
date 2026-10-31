@@ -1,9 +1,12 @@
 export PYTHONHASHSEED := 0
 
-.PHONY: setup lint format typecheck test cov
+.PHONY: setup lint format typecheck test cov data
 
 setup:
 	uv sync --all-extras
+
+data:
+	uv run speechinsight data
 
 lint:
 	uv run ruff check src tests
