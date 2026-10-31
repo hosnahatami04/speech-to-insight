@@ -1,0 +1,14 @@
+# Local on-disk locations for each corpus (populated by the user; gitignored).
+# Paths are relative to the repository root unless absolute.
+librispeech:
+  dev_clean: data/LibriSpeech/dev-clean
+  test_clean: data/LibriSpeech/test-clean
+accents:
+  tsv: data/accents/validated.tsv
+  clips: data/accents/clips
+ami:
+  rttm_dir: data/ami/rttms
+  summary_dir: data/ami/abstractive
+  # Subset of official dev/test meetings used under the CPU budget; see ADR 0003.
+  dev_meetings: [ES2011a, IS1008a, TS3004a]
+  test_meetings: [ES2004a, IS1009a, TS3003a]
