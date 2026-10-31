@@ -85,6 +85,8 @@ module = [
     "soundfile.*",
     "scipy.*",
     "torch.*",
+    "httpx.*",
+    "streamlit.*",
     "transformers.*",
     "sentence_transformers.*",
     "ollama.*",

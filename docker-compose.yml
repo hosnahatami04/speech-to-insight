@@ -1,0 +1,63 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_models:/root/.ollama
+    ports:
+      - "11434:11434"
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ollama list >/dev/null 2>&1"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+    entrypoint: ["/bin/sh", "-c"]
+    # Pull the pinned small instruct model on first boot, then serve.
+    command: >
+      "ollama serve & server_pid=$$!;
+       sleep 5;
+       ollama pull qwen2.5:3b-instruct || true;
+       wait $$server_pid"
+
+  api:
+    build:
+      context: .
+    environment:
+      - SPEECHINSIGHT_OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data:ro
+    depends_on:
+      ollama:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+
+  ui:
+    build:
+      context: .
+    environment:
+      - SPEECHINSIGHT_API=http://api:8000
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "8501:8501"
+    command: ["streamlit", "run", "src/speechinsight/ui/app.py",
+              "--server.address", "0.0.0.0", "--server.port", "8501",
+              "--server.headless", "true"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8501/_stcore/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+volumes:
+  ollama_models:
