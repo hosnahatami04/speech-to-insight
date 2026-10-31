@@ -61,11 +61,11 @@ torch/
 .DS_Store
 Thumbs.db
 
-# Agent and assistant tooling
-CLAUDE.md
+# Local editor and tooling scratch files
+CL*.md
 AGENTS.md
-.claude/
+.cl*/
 .cursor/
 
-# Project specification source
-Speech_to_Insight_Agent_Spec.pdf
+# Local-only reference documents
+*_Spec.pdf
