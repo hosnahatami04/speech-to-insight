@@ -52,5 +52,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Free disk space
+        # The runner comes with ~14 GB free; the ML extras (torch + CUDA wheels)
+        # need more. Remove the preinstalled language toolchains we do not use.
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force || true
+          df -h
+
       - name: Build docker image
         run: docker build -t speech-to-insight:ci .
