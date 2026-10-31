@@ -1,6 +1,6 @@
 export PYTHONHASHSEED := 0
 
-.PHONY: setup lint format typecheck test cov data
+.PHONY: setup lint format typecheck test cov data evaluate-smoke audit
 
 setup:
 	uv sync --all-extras
@@ -21,4 +21,10 @@ test:
 	uv run pytest -m "not ml"
 
 cov:
-	uv run pytest -m "not ml" --cov --cov-report=term-missing
+	uv run pytest -m "not ml" --cov --cov-report=term-missing --cov-fail-under=85
+
+evaluate-smoke:
+	uv run speechinsight evaluate-smoke
+
+audit:
+	uv run pip-audit --strict

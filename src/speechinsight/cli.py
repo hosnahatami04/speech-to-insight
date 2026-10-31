@@ -46,6 +46,25 @@ def data() -> None:
     build_all(root, data_cfg, reports_dir)
 
 
+@app.command("evaluate-smoke")
+def evaluate_smoke(
+    fixture: str = typer.Option(
+        "tests/fixtures/kpi_smoke.json",
+        help="Results file to run the KPI gate against. The default fixture is "
+        "the one CI runs on every PR.",
+    ),
+) -> None:
+    """Run the KPI smoke-gate against a results.json. Exits 1 on failure so CI
+    can gate merges on it."""
+
+    from speechinsight.evaluation.gate import check_file
+
+    verdict = check_file(fixture)
+    typer.echo(verdict.summary())
+    if not verdict.passed:
+        raise typer.Exit(code=1)
+
+
 @app.command("noise-sweep")
 def noise_sweep(
     manifest_path: str = typer.Argument(..., help="JSON manifest of utterances to sweep."),
