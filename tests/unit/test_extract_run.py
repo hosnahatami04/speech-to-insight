@@ -87,7 +87,7 @@ def test_prompt_with_literal_json_braces_substitutes_correctly() -> None:
     ``{transcript}`` placeholder without parsing other braces."""
 
     prompt = (
-        'Example of a valid item:\n'
+        "Example of a valid item:\n"
         '{"text": "demo", "owner": null, "due": null, "evidence": ["u0001"]}\n'
         "Transcript:\n{transcript}\n"
     )
