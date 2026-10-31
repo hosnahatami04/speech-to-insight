@@ -16,7 +16,7 @@ ADD --chmod=755 https://astral.sh/uv/install.sh /uv-install.sh
 RUN /uv-install.sh && mv /root/.local/bin/uv /usr/local/bin/uv && rm /uv-install.sh
 
 WORKDIR /app
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock README.md ./
 COPY src ./src
 COPY prompts ./prompts
 COPY configs ./configs
