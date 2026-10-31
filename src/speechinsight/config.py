@@ -62,6 +62,13 @@ def load_settings(config_dir: Path | None = None) -> Settings:
     merged.update(_read_yaml(default_path))
 
     raw: dict[str, Any] = {}
+    # Expose default.yaml's structured blocks (models, corpora, ...) under raw so
+    # downstream stages can read the pinned model and corpus identities. seed and
+    # paths are handled separately below as first-class settings.
+    for key, value in merged.items():
+        if key in {"seed", "paths"}:
+            continue
+        raw[key] = value
     for yaml_path in sorted(base_dir.glob("*.yaml")):
         if yaml_path.name == "default.yaml":
             continue
