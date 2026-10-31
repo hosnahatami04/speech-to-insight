@@ -1,0 +1,45 @@
+{
+  "attribution": [],
+  "der": {},
+  "extraction": {},
+  "git_commit": "274091bc9e07c6936c5b7ff37c7e835ade5fca5f",
+  "model_pins": {
+    "asr_base": {
+      "repo": "Systran/faster-whisper-base.en",
+      "revision": "3d3d5dee26484f91867d81cb899cfcf72b96be6c"
+    },
+    "asr_small": {
+      "repo": "Systran/faster-whisper-small.en",
+      "revision": "d1d751a5f8271d482d14ca55d9e2deeebbae577f"
+    },
+    "asr_tiny": {
+      "repo": "Systran/faster-whisper-tiny.en",
+      "revision": "0d3d19a32d3338f10357c0889762bd8d64bbdeba"
+    },
+    "extractor_model_digest": "sha256:161ddde4c9cd07c9f1ccb4e0167c434bce72caeb3fc1844262fa66bc877b0426",
+    "extractor_model_tag": "qwen2.5:3b-instruct",
+    "matcher_embedding": {
+      "repo": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+    },
+    "nli": {
+      "repo": "cross-encoder/nli-deberta-v3-small",
+      "revision": "fa2804872c3b4bd748f38c0185cc85775361e735"
+    },
+    "prompt_version": "v1",
+    "speaker_embedding": {
+      "repo": "speechbrain/spkrec-ecapa-voxceleb",
+      "revision": "0f99f2d0ebe89ac095bcc5903c4dd8f72b367286"
+    }
+  },
+  "noise_sweep": [],
+  "per_accent_wer": [],
+  "propagation": {},
+  "wer": {},
+  "what_didnt_work": [
+    "LibriSpeech dev-clean download in the sandbox was unreliable; corpora are placed by the user on the real workstation.",
+    "The accent corpus (Common Voice) requires accepting the publisher terms; per-accent WER lands as soon as those clips are on disk.",
+    "The AMI subset is small (3 dev + 3 test meetings) by CPU budget; see ADR 0003. Scale needs more compute.",
+    "Synthetic transcript corruption does not match the error distribution of real ASR; the real-ASR points on the degradation plot show the gap."
+  ]
+}
