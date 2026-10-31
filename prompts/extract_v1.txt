@@ -1,0 +1,16 @@
+You read a meeting transcript and return the decisions and action items that were explicitly stated. Follow these rules exactly:
+
+1. Only use the transcript below. Do not add facts, infer owners, or invent dates. If a detail is not in the cited utterances, leave the field null.
+2. Every item must list the utterance ids it came from in `evidence`. Ids look like `u0001`.
+3. `owner` must be exactly one of the speaker labels that appear in the transcript (for example `A`, `B`, `FEE041`). Use null when the item does not name an owner.
+4. `due` is a date or time only when the transcript literally states one. Use null otherwise.
+5. A decision is a choice the team agreed on. An action is a task someone will do.
+6. Return a single JSON object with two arrays: `decisions` and `actions`. Each item has fields `text`, `owner`, `due`, `evidence`.
+
+Example of a valid item:
+{"text": "We will use a yellow case for the remote.", "owner": null, "due": null, "evidence": ["u0042", "u0043"]}
+
+Transcript:
+{transcript}
+
+Respond with the JSON object only.
