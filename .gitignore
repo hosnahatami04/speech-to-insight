@@ -27,10 +27,10 @@ env/
 htmlcov/
 coverage.xml
 
-# Project data and artifacts
-data/
-artifacts/
-reports/interim/
+# Project data and artifacts (anchored to repo root; the src data package stays tracked)
+/data/
+/artifacts/
+/reports/interim/
 
 # Audio, transcripts, model and container payloads
 *.wav
