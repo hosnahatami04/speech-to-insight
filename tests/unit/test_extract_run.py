@@ -78,3 +78,29 @@ def test_load_prompt_template(tmp_path) -> None:
     p = tmp_path / "prompt.txt"
     p.write_text("hello {transcript}", encoding="utf-8")
     assert load_prompt_template(p) == "hello {transcript}"
+
+
+def test_prompt_with_literal_json_braces_substitutes_correctly() -> None:
+    """The real production prompt (``prompts/extract_v1.txt``) shows a JSON
+    example containing ``{"text": ...}``. Naive ``str.format`` interprets that
+    as a format field and raises KeyError. The runner must substitute the
+    ``{transcript}`` placeholder without parsing other braces."""
+
+    prompt = (
+        'Example of a valid item:\n'
+        '{"text": "demo", "owner": null, "due": null, "evidence": ["u0001"]}\n'
+        "Transcript:\n{transcript}\n"
+    )
+    captured: dict[str, str] = {}
+
+    class _Capture:
+        def generate_json(self, prompt: str) -> dict:
+            captured["prompt"] = prompt
+            return {"decisions": [], "actions": []}
+
+    report = extract(_transcript(), _Capture(), prompt, _ratio)
+    assert report.schema_errors == 0
+    # The template body is kept; only {transcript} is replaced.
+    assert '{"text": "demo"' in captured["prompt"]
+    assert "u0001" in captured["prompt"]
+    assert "We'll pick blue." in captured["prompt"]

@@ -37,7 +37,11 @@ def _call_once(
     from speechinsight.extract.client import OllamaError
 
     try:
-        raw = client.generate_json(prompt_template.format(transcript=chunk_text))
+        # Simple placeholder substitution (not str.format) because the template
+        # contains literal JSON braces that would otherwise be parsed as format
+        # fields.
+        prompt = prompt_template.replace("{transcript}", chunk_text)
+        raw = client.generate_json(prompt)
         return ExtractionOutput.model_validate(raw)
     except (OllamaError, ValidationError):
         return None

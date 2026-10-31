@@ -101,6 +101,9 @@ testpaths = ["tests"]
 markers = [
     "ml: tests that load real speech or language models (deselected by default in CI)",
 ]
+filterwarnings = [
+    "ignore:Module 'speechbrain.pretrained' was deprecated:UserWarning",
+]
 
 [tool.coverage.run]
 source = ["src/speechinsight"]
